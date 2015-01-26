@@ -14,6 +14,10 @@ Creating a new Heroku instance from the application's parent directory:
     -----> Fetching custom buildpack
     ...
 
+Or add buildback to existing Heroku app
+
+    $ heroku config:add BUILDPACK_URL=https://github.com/socialshop/heroku-buildpack-nginx.git
+
 ## Configuration
 
 ### Variables
