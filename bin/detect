@@ -1,10 +1,4 @@
 #!/usr/bin/env bash
 # bin/detect <build-dir>
 
-if [ -f $1/package.json ]; then
-  echo "NodeJS (package.json)" && exit 0
-elif [ -f $1/composer.json ]; then
-  echo "PHP (composer.json)" && exit 0
-else
-  echo "no" && exit 1
-fi
+echo "NGINX" && exit 0
