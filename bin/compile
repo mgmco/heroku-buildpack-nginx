@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+set -e            # fail fast
+set -o pipefail   # don't ignore exit codes when piping output
+# set -x          # enable debugging
+
+build_dir=$1
+cache_dir=$2
+env_dir=$3
+bp_dir=$(cd $(dirname $0); cd ..; pwd)
+
+# Fix leak
+unset GIT_DIR
+
+# Load some convenience functions like status(), echo(), and indent()
+source $bp_dir/bin/common.sh
+
+export_env_dir $env_dir
+build_env=${EMBER_ENV:-production}
+
+mkdir -p $build_dir/vendor
+
+if test -f $build_dir/hooks/before_hook.sh; then
+  status "Before hook detected. Running..."
+  source $build_dir/hooks/before_hook.sh
+fi
+
+# Output npm debug info on error
+trap cat_npm_debug_log ERR
+
+status "Downloading and installing nginx"
+nginx_url=https://s3.amazonaws.com/devmynd-github/heroku-nginx-1.6.0.tar.gz
+curl $nginx_url -s -o - | tar xzf - -C $build_dir/vendor
+
+status "Adding boot script"
+cp $bp_dir/bin/boot.sh $build_dir
+
+status "Copying configs"
+mkdir -p $build_dir/config
+cp $bp_dir/config/htpasswd.rb $build_dir/config
+cp $bp_dir/config/mime.types $build_dir/config
+if [[ ! -f $build_dir/config/nginx.conf.erb ]]; then
+  cp $bp_dir/config/nginx.conf.erb $build_dir/config
+else
+  status "Custom nginx config found"
+fi
+
+cd $build_dir
+
+if [ -d "$env_dir" ]; then
+  status "Exporting config vars to environment"
+  export_env_dir $env_dir
+fi
+
+if test -f $build_dir/hooks/after_hook.sh; then
+  status "After hook detected. Running..."
+  source $build_dir/hooks/after_hook.sh
+fi
+
+status "Compile of nginx application finished"
