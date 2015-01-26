@@ -59,3 +59,7 @@ You can run your own scripts by creating `after_hook.sh` or `before_hook.sh` fil
 ### Custom Nginx
 
 Need to make a custom nginx configuration change? No problem. In your application, add a `conf/nginx.conf.erb` file. You can copy the existing configuration file in this repo and make your changes to it.
+
+### Useful documentation
+
+https://devcenter.heroku.com/articles/buildpack-api
