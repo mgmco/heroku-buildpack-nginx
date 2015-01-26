@@ -2,6 +2,8 @@
 
 This buildpack will work out-of-the-box with nginx. It installs nginx, add authentication and some other cool stuff. Inspired by and copied from [tonycoco/heroku-buildpack-ember-cli](https://github.com/tonycoco/heroku-buildpack-ember-cli).
 
+By default it will serve the website from the `html` directory. You can easily overwrite that in the custom nginx config file.
+
 ## Usage
 
 Creating a new Heroku instance from the application's parent directory:
