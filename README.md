@@ -51,7 +51,7 @@ For most Ember applications that make any kind of authenticated requests (sendin
 
 Have one index.html file and you want to redirect everything not found to that single file?
 
-    heroku config:set REDIRECT_NOT_FOUNT_TO=/index.html
+    heroku config:set REDIRECT_NOT_FOUND_TO=/index.html
 
 #### Before and After Hooks
 
