@@ -61,7 +61,13 @@ http {
 
     location / {
       expires off;
-      try_files $uri $uri/ =404;
+
+      <% if ENV["REDIRECT_NOT_FOUNT_TO"] %>
+        try_files $uri $uri/ <%= ENV["REDIRECT_NOT_FOUNT_TO"] %> =404;
+      <% else %>
+        try_files $uri $uri/ =404;
+      <% end %>
+
       <% if ENV["NGINX_DEBUG"] %>add_header Nginx-Base-Location on;<% end %>
     }
 

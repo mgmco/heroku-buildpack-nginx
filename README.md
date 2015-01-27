@@ -47,6 +47,12 @@ For most Ember applications that make any kind of authenticated requests (sendin
 
     heroku config:set FORCE_HTTPS=true
 
+#### Redirect not found to
+
+Have one index.html file and you want to redirect everything not found to that single file?
+
+    heroku config:set REDIRECT_NOT_FOUNT_TO=/index.html
+
 #### Before and After Hooks
 
 You can run your own scripts by creating `after_hook.sh` or `before_hook.sh` files (or both) in your app's `hooks` directory:
