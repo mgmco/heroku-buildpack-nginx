@@ -38,6 +38,7 @@ http {
     root <%= ENV["ROOT_DIRECTORY"] || 'html' %>;
     index index.html;
     resolver 8.8.8.8;
+    port_in_redirect off;
 
     <% if ENV["FORCE_HTTPS"] %>
       if ( $http_x_forwarded_proto != 'https' ) {
