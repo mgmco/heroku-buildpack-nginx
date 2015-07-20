@@ -8,7 +8,7 @@ By default it will serve the website from the `html` directory. You can easily o
 
 Creating a new Heroku instance from the application's parent directory:
 
-    $ heroku create --buildpack https://github.com/socialshop/heroku-buildpack-nginx.git
+    $ heroku create --buildpack https://github.com/mgmco/heroku-buildpack-nginx.git
 
     $ git push heroku master
     ...
@@ -18,7 +18,7 @@ Creating a new Heroku instance from the application's parent directory:
 
 Or add buildback to existing Heroku app
 
-    $ heroku config:add BUILDPACK_URL=https://github.com/socialshop/heroku-buildpack-nginx.git
+    $ heroku config:add BUILDPACK_URL=https://github.com/mgmco/heroku-buildpack-nginx.git
 
 ## Configuration
 
